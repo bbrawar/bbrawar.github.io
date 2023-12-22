@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Calculations</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      width: 200px;
+      padding: 5px;
+      margin: 5px;
+    }
+
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    div {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Date Calculations</h1>
+
+<label for="inputDate">Enter a Date:</label>
+<input type="date" id="inputDate">
+
+<button onclick="calculateDates()">Calculate Dates</button>
+
+<div id="results"></div>
+
+<script>
+  function calculateDates() {
+    const inputDate = document.getElementById('inputDate').value;
+
+    if (!inputDate) {
+      alert('Please enter a valid date.');
+      return;
+    }
+
+    const selectedDate = new Date(inputDate);
+    const year = selectedDate.getFullYear();
+    const month = selectedDate.getMonth() + 1; // Months are zero-based
+    const day = selectedDate.getDate();
+
+    const dayOfYear = calculateDayOfYear(month, day);
+    const julianDate = calculateJulianDate(year, month, day);
+    const modifiedJulianDate = calculateModifiedJulianDate(julianDate);
+
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = `
+      <div>Day of the Year: ${dayOfYear}</div>
+      <div>Julian Date: ${julianDate}</div>
+      <div>Modified Julian Date: ${modifiedJulianDate}</div>
+    `;
+  }
+
+  function calculateDayOfYear(month, day) {
+    const daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    let dayOfYear = day;
+    for (let i = 1; i < month; i++) {
+      dayOfYear += daysInMonth[i];
+    }
+    return dayOfYear;
+  }
+
+  function calculateJulianDate(year, month, day) {
+    if (month <= 2) {
+      year--;
+      month += 12;
+    }
+    const A = Math.floor(year / 100);
+    const B = 2 - A + Math.floor(A / 4);
+    const julianDate = Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1));
+    return julianDate + day + B - 1524.5;
+  }
+
+  function calculateModifiedJulianDate(julianDate) {
+    return julianDate - 2400000.5;
+  }
+</script>
+
+</body>
+</html>
