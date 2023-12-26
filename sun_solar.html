@@ -12,6 +12,12 @@
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #87CEEB;
         }
 
         h1 {
@@ -30,10 +36,14 @@
             list-style-type: disc;
             margin-left: 20px;
         }
-
-        svg {
-            margin-top: 20px;
+        #sun {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #FFD700; /* Yellow sun color */
+            box-shadow: 0 0 50px 20px #FFD700; /* Sun's glow effect */
         }
+        
     </style>
 </head>
 
@@ -43,6 +53,8 @@
 
     <p>The Sun, a prominent star in our solar system, plays a crucial role in sustaining life on Earth. It exhibits various
         phenomena that impact space weather and have significant effects on our planet.</p>
+
+    <div id="sun"></div>
 
     <h2>The Sun's Structure</h2>
 
@@ -79,11 +91,7 @@
     <p>Solar flares are sudden and intense releases of energy on the Sun's surface. They emit X-rays and ultraviolet
         radiation and can impact Earth's ionosphere and radio communication.</p>
 
-    <h2>SVG Representation of the Sun</h2>
 
-    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="100" cy="100" r="80" fill="yellow" stroke="orange" stroke-width="1" />
-    </svg>
 
     <footer>
         <p>Author: Bhuvnesh Brawar</p>
