@@ -4,41 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter: The Sun and Solar Phenomena</title>
+    <title>3D Sun and Solar Phenomena</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 20px;
+            background-color: #87CEEB; /* Light Blue sky color */
+            color: #fff; /* White text color */
+            font-family: Arial, sans-serif;
         }
 
-        h1 {
-            color: #333;
+        #sun {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #FFD700; /* Yellow sun color */
+            box-shadow: 0 0 50px 20px #FFD700; /* Sun's glow effect */
         }
 
-        h2 {
-            color: #444;
+        h1, h2 {
+            margin-top: 20px;
         }
 
         p {
-            margin-bottom: 20px;
+            line-height: 1.5;
         }
 
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-
-        svg {
+        footer {
             margin-top: 20px;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-
+    <div id="sun"></div>
+    
     <h1>The Sun and Solar Phenomena</h1>
 
     <p>The Sun, a prominent star in our solar system, plays a crucial role in sustaining life on Earth. It exhibits various
@@ -79,16 +83,10 @@
     <p>Solar flares are sudden and intense releases of energy on the Sun's surface. They emit X-rays and ultraviolet
         radiation and can impact Earth's ionosphere and radio communication.</p>
 
-    <h2>SVG Representation of the Sun</h2>
-
-    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="100" cy="100" r="80" fill="yellow" stroke="orange" stroke-width="1" />
-    </svg>
-
+    
     <footer>
         <p>Author: Bhuvnesh Brawar</p>
     </footer>
-
 </body>
 
 </html>
