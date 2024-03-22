@@ -17,6 +17,7 @@
             text-align: center;
         }
         #output-container {
+            display: none;
             margin-top: 20px;
             padding: 20px;
             border: 1px solid #ccc;
@@ -36,7 +37,6 @@
             background-color: #0056b3;
         }
     </style>
-    <script src="get_bibtex.js" defer></script>
 </head>
 <body>
     <div id="input-container">
@@ -63,6 +63,8 @@
                     var apiUrl = "https://api.crossref.org/works/" + doi;
                     $.get(apiUrl, function(data) {
                         if (data.message && data.message.title && data.message.author && data.message['published-print']) {
+                            var firstAuthorFamilyName = data.message.author[0].family;
+                            var year = publishedDate[0];
                             var title = data.message.title[0];
                             var authors = data.message.author.map(function(author) {
                                 return author.family + ', ' + author.given;
@@ -78,7 +80,7 @@
                             var journal = data.message['container-title'][0];
                             var publisher = data.message.publisher;
 
-                            bibtexText += '@article{' + doi + ',\n' +
+                            bibtexText += '@article{' + firstAuthorFamilyName + year + ',\n' +
                                          '  doi = {' + doi + '},\n' +
                                          '  url = {' + data.message.URL + '},\n' +
                                          '  year = {' + year + '},\n' +
@@ -98,6 +100,7 @@
                             bibtexText += "BibTeX data not found for the provided DOI: " + doi + "\n";
                         }
                         document.getElementById('bibtex').innerText = bibtexText;
+                        document.getElementById('output-container').style.display = 'block'; // Show output container
                     });
                 }
             }
