@@ -16,6 +16,13 @@
         #input-container {
             text-align: center;
         }
+        #output-container {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
         #copyBtn {
             margin-top: 10px;
             cursor: pointer;
@@ -36,8 +43,10 @@
         <h2>Get BibTeX from DOI</h2>
         <p>Enter DOI: <input type="text" id="doi"></p>
         <button id="getBibtexBtn">Get BibTeX</button>
-        <pre id="bibtex"></pre>
-        <button id="copyBtn">Copy to Clipboard</button>
+        <div id="output-container">
+            <pre id="bibtex"></pre>
+            <button id="copyBtn">Copy to Clipboard</button>
+        </div>
     </div>
 
     <script>
@@ -54,4 +63,3 @@
     </script>
 </body>
 </html>
-
