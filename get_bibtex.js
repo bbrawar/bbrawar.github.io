@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.message && data.message.title && data.message.author && data.message['published-print']) {
                 var title = data.message.title[0];
                 var authors = data.message.author.map(function(author) {
-                    return author.family + ', ' + author.given;
+                    return  author.given + ' ' +author.family;
                 }).join(' and ');
 
                 var publishedDate = data.message['published-print']['date-parts'][0];
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var journal = data.message['container-title'][0];
                 var publisher = data.message.publisher;
 
-                var bibtex = '@article{' + doi + ',\n' +
+                var bibtex = '@article{' + author + year + ',\n' +
                              '  doi = {' + doi + '},\n' +
                              '  url = {' + data.message.URL + '},\n' +
                              '  year = {' + year + '},\n' +
