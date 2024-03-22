@@ -41,7 +41,7 @@
 <body>
     <div id="input-container">
         <h2>Get BibTeX from DOI</h2>
-        <p>Enter DOI: <input type="text" id="doi"></p>
+        <p>Enter DOI(s): <input type="text" id="doi"></p>
         <button id="getBibtexBtn">Get BibTeX</button>
         <div id="output-container">
             <pre id="bibtex"></pre>
@@ -50,10 +50,62 @@
     </div>
 
     <script>
+        document.getElementById("getBibtexBtn").addEventListener("click", function() {
+            var doisInput = document.getElementById("doi").value;
+            var dois = doisInput.split(',').map(doi => doi.trim());
+
+            var bibtexText = "";
+            var totalDois = dois.length;
+
+            for (var i = 0; i < totalDois; i++) {
+                var doi = dois[i];
+                if (doi !== "") {
+                    var apiUrl = "https://api.crossref.org/works/" + doi;
+                    $.get(apiUrl, function(data) {
+                        if (data.message && data.message.title && data.message.author && data.message['published-print']) {
+                            var title = data.message.title[0];
+                            var authors = data.message.author.map(function(author) {
+                                return author.family + ', ' + author.given;
+                            }).join(' and ');
+
+                            var publishedDate = data.message['published-print']['date-parts'][0];
+                            var year = publishedDate[0];
+                            var month = publishedDate[1];
+
+                            var volume = data.message.volume;
+                            var issue = data.message.issue;
+                            var pages = data.message.page;
+                            var journal = data.message['container-title'][0];
+                            var publisher = data.message.publisher;
+
+                            bibtexText += '@article{' + doi + ',\n' +
+                                         '  doi = {' + doi + '},\n' +
+                                         '  url = {' + data.message.URL + '},\n' +
+                                         '  year = {' + year + '},\n' +
+                                         '  month = {' + month + '},\n' +
+                                         '  publisher = {' + publisher + '},\n' +
+                                         '  volume = {' + volume + '},\n' +
+                                         '  number = {' + issue + '},\n' +
+                                         '  pages = {' + pages + '},\n' +
+                                         '  author = {' + authors + '},\n' +
+                                         '  title = {' + title + '},\n' +
+                                         '  journal = {' + journal + '}\n' +
+                                         '}';
+                            if (i !== totalDois - 1) {
+                                bibtexText += '\n\n';
+                            }
+                        } else {
+                            bibtexText += "BibTeX data not found for the provided DOI: " + doi + "\n";
+                        }
+                        document.getElementById('bibtex').innerText = bibtexText;
+                    });
+                }
+            }
+        });
+
         document.getElementById("copyBtn").addEventListener("click", function() {
-            var bibtexText = document.getElementById("bibtex").innerText;
             var tempElement = document.createElement("textarea");
-            tempElement.value = bibtexText;
+            tempElement.value = document.getElementById("bibtex").innerText;
             document.body.appendChild(tempElement);
             tempElement.select();
             document.execCommand("copy");
