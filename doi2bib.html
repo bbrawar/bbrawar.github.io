@@ -71,7 +71,7 @@
 
                             var title = data.message.title[0];
                             var authors = data.message.author.map(function(author) {
-                                return author.family + ', ' + author.given;
+                                return  author.given + ' ' + author.family;
                             }).join(' and ');
 
                             var month = publishedDate[1];
