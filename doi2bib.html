@@ -64,14 +64,15 @@
                     $.get(apiUrl, function(data) {
                         if (data.message && data.message.title && data.message.author && data.message['published-print']) {
                             var firstAuthorFamilyName = data.message.author[0].family;
+
+                            var publishedDate = data.message['published-print']['date-parts'][0];
                             var year = publishedDate[0];
+
                             var title = data.message.title[0];
                             var authors = data.message.author.map(function(author) {
                                 return author.family + ', ' + author.given;
                             }).join(' and ');
 
-                            var publishedDate = data.message['published-print']['date-parts'][0];
-                            var year = publishedDate[0];
                             var month = publishedDate[1];
 
                             var volume = data.message.volume;
