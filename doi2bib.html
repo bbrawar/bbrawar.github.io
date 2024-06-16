@@ -12,43 +12,72 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
         }
         #input-container {
             text-align: center;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #007bff;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
         #output-container {
             display: none;
-            justify-content: left;
             margin-top: 20px;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #f9f9f9;
+            text-align: left;
         }
-        #copyBtn {
-            margin-top: 10px;
-            cursor: pointer;
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-        }
-        #copyBtn: hover {
-            background-color: #0056b3;
+        #bibtex {
+            white-space: pre-wrap;
+            word-break: break-all;
         }
         .footer { 
             position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            z-index: 10;
+            bottom: 10px; 
+            left: 50%; 
+            transform: translateX(-50%);
+            font-size: 0.9em;
+            color: #888;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div id="input-container">
         <h2>Get BibTeX from DOI</h2>
-        <p>Enter DOI(s): <input type="text" id="doi"></p>
+        <p>Enter DOI(s): <input type="text" id="doi" placeholder="Separate multiple DOIs with commas"></p>
         <button id="getBibtexBtn">Get BibTeX</button>
         <div id="output-container">
             <pre id="bibtex"></pre>
@@ -59,59 +88,56 @@
     <script>
         document.getElementById("getBibtexBtn").addEventListener("click", function() {
             var doisInput = document.getElementById("doi").value;
-            var dois = doisInput.split(',').map(doi => doi.trim());
-
+            var dois = doisInput.split(',').map(doi => doi.trim()).filter(doi => doi !== "");
             var bibtexText = "";
-            var totalDois = dois.length;
 
-            for (var i = 0; i < totalDois; i++) {
-                var doi = dois[i];
-                if (doi !== "") {
-                    var apiUrl = "https://api.crossref.org/works/" + doi;
-                    $.get(apiUrl, function(data) {
-                        if (data.message && data.message.title && data.message.author && data.message['published-print']) {
-                            var firstAuthorFamilyName = data.message.author[0].family;
-
-                            var publishedDate = data.message['published-print']['date-parts'][0];
-                            var year = publishedDate[0];
-
-                            var title = data.message.title[0];
-                            var authors = data.message.author.map(function(author) {
-                                return  author.given + ' ' + author.family;
-                            }).join(' and ');
-
-                            var month = publishedDate[1];
-
-                            var volume = data.message.volume;
-                            var issue = data.message.issue;
-                            var pages = data.message.page;
-                            var journal = data.message['container-title'][0];
-                            var publisher = data.message.publisher;
-
-                            bibtexText += '@article{' + firstAuthorFamilyName + year + ',\n' +
-                                         '  doi = {' + doi + '},\n' +
-                                         '  url = {' + data.message.URL + '},\n' +
-                                         '  year = {' + year + '},\n' +
-                                         '  month = {' + month + '},\n' +
-                                         '  publisher = {' + publisher + '},\n' +
-                                         '  volume = {' + volume + '},\n' +
-                                         '  number = {' + issue + '},\n' +
-                                         '  pages = {' + pages + '},\n' +
-                                         '  author = {' + authors + '},\n' +
-                                         '  title = {' + title + '},\n' +
-                                         '  journal = {' + journal + '}\n' +
-                                         '}';
-                            if (i !== totalDois - 1) {
-                                bibtexText += '\n\n';
-                            }
-                        } else {
-                            bibtexText += "BibTeX data not found for the provided DOI: " + doi + "\n";
-                        }
-                        document.getElementById('bibtex').innerText = bibtexText;
-                        document.getElementById('output-container').style.display = 'block'; // Show output container
-                    });
-                }
+            if (dois.length === 0) {
+                alert("Please enter at least one DOI.");
+                return;
             }
+
+            var promises = dois.map(doi => {
+                return $.get(`https://api.crossref.org/works/${doi}`).then(data => {
+                    if (data.message && data.message.title && data.message.author && data.message['published-print']) {
+                        var firstAuthorFamilyName = data.message.author[0].family;
+                        var publishedDate = data.message['published-print']['date-parts'][0];
+                        var year = publishedDate[0];
+                        var title = data.message.title[0];
+                        var authors = data.message.author.map(author => `${author.given} ${author.family}`).join(' and ');
+                        var month = publishedDate[1] || "";
+                        var volume = data.message.volume || "";
+                        var issue = data.message.issue || "";
+                        var pages = data.message.page || "";
+                        var journal = data.message['container-title'][0] || "";
+                        var publisher = data.message.publisher || "";
+
+                        return `@article{${firstAuthorFamilyName}${year},
+  doi = {${doi}},
+  url = {${data.message.URL}},
+  year = {${year}},
+  month = {${month}},
+  publisher = {${publisher}},
+  volume = {${volume}},
+  number = {${issue}},
+  pages = {${pages}},
+  author = {${authors}},
+  title = {${title}},
+  journal = {${journal}}
+}`;
+                    } else {
+                        return `BibTeX data not found for the provided DOI: ${doi}`;
+                    }
+                });
+            });
+
+            Promise.all(promises).then(results => {
+                bibtexText = results.join('\n\n');
+                document.getElementById('bibtex').innerText = bibtexText;
+                document.getElementById('output-container').style.display = 'block';
+            }).catch(error => {
+                console.error("Error fetching BibTeX:", error);
+                alert("An error occurred while fetching BibTeX data. Please try again.");
+            });
         });
 
         document.getElementById("copyBtn").addEventListener("click", function() {
@@ -124,9 +150,8 @@
             alert("BibTeX copied to clipboard!");
         });
     </script>
-    <footer>
-        <p> &#169; <a href=bbrawar.github.io>Bhuvnesh Brawar</a> </p> 
-    </footer>
+    <div class="footer">
+        <p> &#169; <a href="https://bbrawar.github.io">Bhuvnesh Brawar</a> </p>
+    </div>
 </body>
-
 </html>
