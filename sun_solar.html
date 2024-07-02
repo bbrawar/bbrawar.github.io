@@ -1,93 +1,126 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Sun and Solar Phenomena</title>
     <style>
         body {
-            /* display: flex; */
             justify-content: center;
             align-items: center;
-            height: 100vh;
             max-width: 800px;
             margin: 0 auto;
-            background-color: #87CEEB; /* Light Blue sky color */
+            padding: 20px;
+            background-color: #87CEEB; /* Light blue sky color */
             color: #fff; /* White text color */
             font-family: Arial, sans-serif;
-        }
+        
+	}
 
-        #sun {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: #FFD700; /* Yellow sun color */
-            box-shadow: 0 0 50px 20px #FFD700; /* Sun's glow effect */
-        }
+	    #sun {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #FFD700; /* Yellow sun color */
+        box-shadow: 0 0 50px 20px #FFD700; /* Sun's glow effect */
+        margin: 20px auto;
+    }
 
-        h1, h2 {
-            margin-top: 20px;
-        }
+    h1, h2 {
+        margin-top: 20px;
+    }
 
-        p {
-            line-height: 1.5;
-        }
+    p {
+        line-height: 1.5;
+    }
 
-        footer {
-            margin-top: 20px;
-            text-align: center;
-        }
-    </style>
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px 0;
+    }
+
+    footer {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .header a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+    }
+    .flickering-box {
+        background-color: #FFD700;
+        color: #000;
+        padding: 20px;
+        margin: 20px 0;
+        text-align: center;
+        animation: flicker 1s infinite alternate;
+    }
+
+    @keyframes flicker {
+        0% { opacity: 1; }
+        50% { opacity: 0.5; }
+        100% { opacity: 1; }
+    }
+</style>
+
 </head>
-
 <body>
+    <div class="header">
+        <h1>The Sun and Solar Phenomena</h1>
+        <a href="https://bbrawar.github.io">Home</a>
+    </div>
+
     <div id="sun"></div>
-    
-    <h1>The Sun and Solar Phenomena</h1>
 
-    <p>The Sun, a prominent star in our solar system, plays a crucial role in sustaining life on Earth. It exhibits various
-        phenomena that impact space weather and have significant effects on our planet.</p>
+<p>The Sun, our closest star, is essential to life on Earth. This enormous sphere of hot plasma exhibits various fascinating phenomena that influence space weather and impact our planet in significant ways. Understanding these phenomena helps us better appreciate the dynamic nature of our solar system and its effects on Earth.</p>
 
-    <h2>The Sun's Structure</h2>
+<h2>The Sun's Structure</h2>
+<img src="https://s3-us-west-2.amazonaws.com/courses-images/wp-content/uploads/sites/1095/2016/11/03160111/OSC_Astro_15_01_Sun.jpg" alt="Sun's structure">
+<p>The Sun comprises several distinct layers: the core, radiative zone, convective zone, photosphere, chromosphere, and corona. The core is the Sun's powerhouse, where nuclear fusion occurs, converting hydrogen into helium and releasing vast amounts of energy. The radiative zone transfers this energy outward through radiation, while the convective zone moves energy to the surface through convection currents. The photosphere is the visible surface of the Sun, from which light is emitted. Above it, the chromosphere and corona form the Sun's outer atmosphere, visible during solar eclipses. Each layer has unique characteristics that contribute to the Sun's complex behavior and the solar phenomena we observe.</p>
 
-    <p>The Sun consists of several layers, including the core, radiative zone, convective zone, photosphere, chromosphere,
-        and corona. Each layer has distinct properties and contributes to the Sun's overall behavior.</p>
+<h2>Solar Wind</h2>
+<img src="https://dq0hsqwjhea1.cloudfront.net/2018-08-22_5b7d81189873c_SolarCorona2018.jpg" alt="Solar wind">
+<p>The Sun constantly emits a stream of charged particles known as the solar wind. This continuous outflow shapes the heliosphere, the Sun's bubble of influence that extends far beyond the orbit of Pluto. The solar wind interacts with Earth's magnetosphere, creating auroras and affecting space weather conditions. This interaction can also impact satellites, astronauts, and even power grids on Earth. Understanding the solar wind helps scientists predict space weather and protect our technological infrastructure.</p>
 
-    <h2>Solar Wind</h2>
+<h2>Sunspots</h2>
+<img src="https://www.weather.gov/images/fsd/astro/Sun_sunspot.jpg" alt="Sunspots">
+<p>Sunspots are temporary, darker regions on the Sun's photosphere caused by intense magnetic activity. These areas are cooler than the surrounding regions, so they appear darker. Sunspots often occur in pairs or groups and last several days or weeks. They can affect the amount of solar radiation that reaches Earth, influencing our planet's climate and weather patterns. Sunspot activity follows an 11-year cycle, known as the solar cycle, which affects the frequency and intensity of solar phenomena.</p>
 
-    <p>The Sun constantly releases a stream of charged particles known as solar wind. This continuous outflow affects the
-        heliosphere and interacts with the Earth's magnetosphere, influencing space weather conditions.</p>
+<h2>Coronal Holes</h2>
+<img src="https://scied.ucar.edu/sites/default/files/media/images/sun_coronal_holes_sdo_aia_193_12jan2011_594x550.jpg" alt="Coronal holes">
+<p>Coronal holes are areas of the Sun's corona that appear darker and cooler. These regions are sources of high-speed solar wind, which can lead to geomagnetic storms on Earth. Coronal holes are usually found near the Sun's poles during periods of low solar activity but can appear at lower latitudes during high activity. The solar wind from coronal holes can travel much faster than the typical solar wind, impacting Earth's magnetosphere and leading to spectacular auroras and potential disruptions to satellite communications and power systems.</p>
 
-    <h2>Sunspots</h2>
+<h2>Coronal Mass Ejections (CMEs)</h2>
+<img src="https://cdn.britannica.com/15/96915-050-787329AB/bubble-plasma-disk-Sun-right-ejection-instrument-Dec-2-2002.jpg" alt="Coronal mass ejections">
+<p>Coronal Mass Ejections (CMEs) are massive bursts of solar plasma and magnetic fields ejected into space. These eruptions can carry billions of tons of material and travel millions of miles per hour. When CMEs head toward Earth, they can cause geomagnetic disturbances, disrupt communication and power systems, and pose risks to astronauts in space. CMEs can also compress Earth's magnetosphere, leading to stronger and more widespread auroras. Monitoring CMEs is crucial for predicting space weather and mitigating their impacts on our technological systems.</p>
 
-    <p>Sunspots are temporary phenomena on the Sun's photosphere that appear as darker spots. They are associated with
-        intense magnetic activity and can impact solar radiation.</p>
+<h2>Corotating Interaction Regions (CIRs)</h2>
+<img src="https://www.researchgate.net/profile/Lan-Jian/publication/228924319/figure/fig1/AS:300832085037062@1448735366380/Schematic-illustrating-2-D-corotating-stream-structure-in-the-solar-equatorial-plane-in.png" alt="Corotating interaction regions">
+<p>Corotating Interaction Regions (CIRs) form when fast-moving solar wind streams collide with slower wind regions. These interactions create shock waves and enhanced regions of plasma density and magnetic field strength. CIRs can enhance space weather effects, potentially impacting satellite operations and Earth's magnetosphere. Understanding CIRs helps scientists predict periods of increased space weather activity and develop strategies to protect our technological infrastructure.</p>
 
-    <h2>Coronal Holes</h2>
+<h2>Solar Flares</h2>
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/X_Class_Solar_Flare_Sends_%E2%80%98Shockwaves%E2%80%99_on_The_Sun_%286819094556%29.jpg" alt="Solar flares">
+<p>Solar flares are sudden, intense bursts of energy from the Sun's surface. These flares emit X-rays and ultraviolet radiation, which can disturb Earth's ionosphere and disrupt radio communications. Solar flares are often associated with sunspot activity and can occur in minutes, releasing the energy equivalent of millions of hydrogen bombs. The radiation from solar flares can also pose risks to astronauts and damage satellites. Monitoring solar flares is essential for understanding and predicting space weather events that can impact Earth.</p>
 
-    <p>Coronal holes are regions on the Sun with lower density and temperature. They can lead to increased solar wind
-        speeds and contribute to geomagnetic storms on Earth.</p>
-
-    <h2>Coronal Mass Ejections (CMEs)</h2>
-
-    <p>CMEs are massive expulsions of solar plasma and magnetic field into space. When directed toward Earth, they can
-        cause geomagnetic disturbances, affecting communication and power systems.</p>
-
-    <h2>Corotating Interaction Regions (CIRs)</h2>
-
-    <p>CIRs occur when high-speed solar wind streams interact with slower solar wind regions. They can lead to enhanced
-        space weather effects.</p>
-
-    <h2>Solar Flares</h2>
-
-    <p>Solar flares are sudden and intense releases of energy on the Sun's surface. They emit X-rays and ultraviolet
-        radiation and can impact Earth's ionosphere and radio communication.</p>
+<div class="flickering-box">
+    <a href="https://umbra.nascom.nasa.gov/images/latest.html" style="color: #000;">Click here for current solar images by NASA</a>
+</div>
 
     
-    <footer>
-        <p>Author: Bhuvnesh Brawar</p>
-    </footer>
+<footer>
+    <p>Author: <a href="https://bbrawar.github.io" style="color: #fff;">Bhuvnesh Brawar</a></p>
+</footer>
 </body>
-
 </html>
