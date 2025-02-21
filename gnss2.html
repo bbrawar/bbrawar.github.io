@@ -222,6 +222,7 @@
 <p>GNSS (Global Navigation Satellite System) signals vary depending on the satellite constellation. Different systems, such as GPS, GLONASS, Galileo, BeiDou, QZSS, and NavIC, transmit signals on multiple frequencies for improved accuracy, reliability, and resistance to interference. Here’s a breakdown of the major GNSS signals:
 </p>
 <h3>**1. GPS (USA)**</h3> 
+	    <p>
 - **L1 (1575.42 MHz)** – C/A (Coarse/Acquisition) code for civilian use, P(Y) code for military.
 - **L2 (1227.60 MHz)** – P(Y) code for military, L2C for civilian.
 - **L5 (1176.45 MHz)** – Advanced civilian signal with higher accuracy and robustness.
@@ -256,7 +257,143 @@
 - **L5 (1176.45 MHz)** – Open civilian signal.
 - **S-band (2492.028 MHz)** – Unique to NavIC, used for regional navigation.
 
-Each GNSS system is evolving, with more signals and enhancements being introduced to improve positioning accuracy, resilience against interference, and global compatibility. Would you like details on signal modulation, bandwidth, or applications?	    
+Each GNSS system is evolving, with more signals and enhancements being introduced to improve positioning accuracy, resilience against interference, and global compatibility.
+</p>
+ <h1>Impact of GNSS Signal Architecture on Positioning Accuracy & Receiver Design</h1>
+    <p>The GNSS signal structure includes <strong>C/A, B, C, and P(Y) codes</strong>, each optimized for different use cases. Below, we analyze their <strong>architectural differences</strong> and <strong>impact on positioning accuracy, multipath mitigation, and receiver performance</strong>.</p>
+
+    <h2>1. GNSS Signal Types & Their Purpose</h2>
+    <table>
+        <tr>
+            <th>Signal</th>
+            <th>Description</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td><strong>C/A (Coarse Acquisition)</strong></td>
+            <td>Short 1 ms Gold code, used in civilian GPS</td>
+            <td>Standard positioning (e.g., smartphones, navigation)</td>
+        </tr>
+        <tr>
+            <td><strong>B (Data)</strong></td>
+            <td>Contains navigation data, modulated using BOC/MBOC</td>
+            <td>Improved precision, multipath resistance</td>
+        </tr>
+        <tr>
+            <td><strong>C (Pilot)</strong></td>
+            <td>No data, just a tracking reference signal</td>
+            <td>Enhances phase tracking for RTK/PPP</td>
+        </tr>
+        <tr>
+            <td><strong>P(Y) (Precision Encrypted)</strong></td>
+            <td>Long, high-rate P-code encrypted into Y-code</td>
+            <td>Military & secure applications</td>
+        </tr>
+    </table>
+
+    <h2>2. Impact on Positioning Accuracy</h2>
+    <h3>2.1 Pseudorange Precision</h3>
+    <p><strong>P(Y) and Pilot (C) signals offer the highest precision</strong>, while C/A code has the largest errors (~3-10m).</p>
+    
+    <h3>2.2 Multipath Mitigation</h3>
+    <table>
+        <tr>
+            <th>Signal</th>
+            <th>Multipath Resistance</th>
+            <th>Reason</th>
+        </tr>
+        <tr>
+            <td>C/A Code</td>
+            <td>Poor</td>
+            <td>Short code, easily corrupted</td>
+        </tr>
+        <tr>
+            <td>B (Data) Component</td>
+            <td>Good</td>
+            <td>BOC/MBOC modulation</td>
+        </tr>
+        <tr>
+            <td>C (Pilot) Component</td>
+            <td>Excellent</td>
+            <td>Long code, no data</td>
+        </tr>
+        <tr>
+            <td>P(Y) Code</td>
+            <td>High</td>
+            <td>High-rate code reduces autocorrelation errors</td>
+        </tr>
+    </table>
+
+    <h2>3. Impact on Receiver Design</h2>
+    <h3>3.1 Signal Acquisition Time</h3>
+    <table>
+        <tr>
+            <th>Signal</th>
+            <th>Acquisition Speed</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td>C/A Code</td>
+            <td>Fast (~1-2s)</td>
+            <td>Short Gold code enables quick acquisition</td>
+        </tr>
+        <tr>
+            <td>B (Data) Component</td>
+            <td>Medium</td>
+            <td>Longer spreading code</td>
+        </tr>
+        <tr>
+            <td>C (Pilot) Component</td>
+            <td>Slow but robust</td>
+            <td>No data, better for weak signals</td>
+        </tr>
+        <tr>
+            <td>P(Y) Code</td>
+            <td>Slow & encrypted</td>
+            <td>Requires military access</td>
+        </tr>
+    </table>
+    
+    <h3>3.2 Interference & Jamming Resistance</h3>
+    <table>
+        <tr>
+            <th>Signal</th>
+            <th>Jamming Resistance</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td>C/A Code</td>
+            <td>Weak</td>
+            <td>Easily jammed/spoofed</td>
+        </tr>
+        <tr>
+            <td>B (Data) Component</td>
+            <td>Moderate</td>
+            <td>BOC/MBOC spread spectrum helps</td>
+        </tr>
+        <tr>
+            <td>C (Pilot) Component</td>
+            <td>Strong</td>
+            <td>No data improves robustness</td>
+        </tr>
+        <tr>
+            <td>P(Y) Code</td>
+            <td>Very High</td>
+            <td>Encrypted & high-rate</td>
+        </tr>
+    </table>
+
+    <h2>Final Summary</h2>
+    <p><strong>Key Takeaways:</strong></p>
+    <ul>
+        <li><strong>C/A Code</strong> is <em>fast but inaccurate</em> (used in civilian GPS).</li>
+        <li><strong>B (Data) signals</strong> improve <em>accuracy and multipath resistance</em>.</li>
+        <li><strong>C (Pilot) signals</strong> offer <em>best tracking performance for RTK/PPP applications</em>.</li>
+        <li><strong>P(Y) Code</strong> is <em>highest precision but restricted to military use</em>.</li>
+    </ul>
+    <p><strong>For general GPS applications:</strong> Use <em>C/A Code</em>.</p>
+    <p><strong>For geodesy, RTK, or PPP:</strong> Use <em>B + C signals</em>.</p>
+    <p><strong>For mili
 
     <footer>
         <p>Author: Bhuvnesh Brawar</p>
