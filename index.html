@@ -904,6 +904,38 @@
                   <h2>Publications & Conferences </h2>
                 </div>
 
+                <div class="buttons">
+                    <button onclick="filterPublications('all')">All</button>
+                    <button onclick="filterPublications('journal')">Journal Articles</button>
+                    <button onclick="filterPublications('conference')">Conferences</button>
+                    <button onclick="filterPublications('book')">Book Chapters</button>
+                </div>
+                
+                <div id="publications">
+                    <div class="publication journal">Journal Article 1</div>
+                    <div class="publication journal">Journal Article 2</div>
+                    <div class="publication conference">Conference Paper 1</div>
+                    <div class="publication conference">Conference Paper 2</div>
+                    <div class="publication book">Book Chapter 1</div>
+                    <div class="publication book">Book Chapter 2</div>
+                </div>
+                
+                <script>
+                    function filterPublications(category) {
+                        let publications = document.querySelectorAll('.publication');
+                        publications.forEach(pub => {
+                            if (category === 'all' || pub.classList.contains(category)) {
+                                pub.style.display = 'block';
+                            } else {
+                                pub.style.display = 'none';
+                            }
+                        });
+                    }
+                    
+                    // Show all publications by default
+                    filterPublications('all');
+                </script>
+
                 <div class="section-content">
 
                   <div class="row">
