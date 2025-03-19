@@ -903,6 +903,38 @@
                 <div class="page-title">
                   <h2>Publications & Conferences </h2>
                 </div>
+                    <div class="buttons">
+                    <button onclick="filterPublications('all')">All</button>
+                    <button onclick="filterPublications('journal')">Journal Articles</button>
+                    <button onclick="filterPublications('conference')">Conferences</button>
+                    <button onclick="filterPublications('book')">Book Chapters</button>
+                </div>
+                
+                <ol id="publication-list">
+                    <li class="publication journal">Journal Article 1</li>
+                    <li class="publication book">Book 1</li>
+                    <li class="publication journal">Journal Article 2</li>
+                    <li class="publication book">Book 2</li>
+                    <li class="publication conference">Conference 1</li>
+                </ol>
+            
+            
+                <script>
+                    function filterPublications(category) {
+                        let publications = document.querySelectorAll('.publication');
+                        publications.forEach((pub, index) => {
+                            if (category === 'all' || pub.classList.contains(category)) {
+                                pub.style.display = 'block';
+                            } else {
+                                pub.style.display = 'none';
+                            }
+                        });
+                    }
+                    
+                    // Show all publications by default
+                    filterPublications('all');
+                </script>
+                <!--
                 <div class="white-space-20"></div>
 
                 <button onclick="filterList('all')">All</button>
@@ -911,7 +943,6 @@
                 <button onclick="filterList('conference')">Conference Proceedings</button>
                 
                 <ol id="publication-list">
-                    <!-- APA style -->
                     <li class="book">Datta, A., <b>Brawar, B.</b>, Mangla, S., Ayyagari, D., Chakraborty, S. (2025). A brief review of Low latitude ionosphere: With multi-frequency observation using GPS, NavIC and GMRT, (Book Chapter, In press) </li>
                     <li class="journal">Sanyal, A., <b>Brawar, B.</b>, Maity, S. K., Jana, S., Polard, J. M., Newton, P., Williams, G. S., Potirakis, S. M., Haralambous, H., Balasis, G., Brundell, J., Panchadhyayee, P., Datta, A., Maurya, A. K., Ray, S., & Sasmal, S. (2025). Investigation of the Ionospheric Effects of the Solar Eclipse of April 8, 2024 Using Multi-Instrument Measurements. Atmosphere, 16(2), 161. https://doi.org/10.3390/atmos16020161</li>
                     <li class="journal">Das, S., Maity, S. K., Nanda, K., Jana, S., <b>Brawar, B.</b>, Panchadhyayee, P., … Sasmal, S. (2024). Study of the response of the upper atmosphere during the annular solar eclipse on October 14, 2023. Advances in Space Research: The Official Journal of the Committee on Space Research (COSPAR), 74(7), 3344–3360. doi:10.1016/j.asr.2024.06.021</li>
@@ -932,6 +963,7 @@
                         });
                     }
                 </script>
+                -->
 
                 <div class="section-content">
 
