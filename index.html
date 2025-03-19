@@ -902,39 +902,8 @@
               <section data-id="portfolio" class="animated-section">
                 <div class="page-title">
                   <h2>Publications & Conferences </h2>
-                </div>
-                    <div class="buttons">
-                    <button onclick="filterPublications('all')">All</button>
-                    <button onclick="filterPublications('journal')">Journal Articles</button>
-                    <button onclick="filterPublications('conference')">Conferences</button>
-                    <button onclick="filterPublications('book')">Book Chapters</button>
-                </div>
-                
-                <ol id="publication-list">
-                    <li class="publication journal">Journal Article 1</li>
-                    <li class="publication book">Book 1</li>
-                    <li class="publication journal">Journal Article 2</li>
-                    <li class="publication book">Book 2</li>
-                    <li class="publication conference">Conference 1</li>
-                </ol>
-            
-            
-                <script>
-                    function filterPublications(category) {
-                        let publications = document.querySelectorAll('.publication');
-                        publications.forEach((pub, index) => {
-                            if (category === 'all' || pub.classList.contains(category)) {
-                                pub.style.display = 'block';
-                            } else {
-                                pub.style.display = 'none';
-                            }
-                        });
-                    }
-                    
-                    // Show all publications by default
-                    filterPublications('all');
-                </script>
-                <!--
+                </div>             
+
                 <div class="white-space-20"></div>
 
                 <button onclick="filterList('all')">All</button>
@@ -963,7 +932,6 @@
                         });
                     }
                 </script>
-                -->
 
                 <div class="section-content">
 
