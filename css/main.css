@@ -2920,3 +2920,5 @@ blockquote {
     border: none;
 }
 
+.hidden { display: none; }
+
