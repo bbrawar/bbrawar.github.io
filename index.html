@@ -918,20 +918,24 @@
                     <li class="conference"><b>Brawar, B.</b>, Datta, A., Ayyagari, D., & Sasmal, S. (2024). Ionospheric Plasma Bubbles characterisation using NavIC Satellites. Proceedings of the 6th URSI Regional Conference on Radio Science – RCRS 2024. Presented at the 6th URSI Regional Conference on Radio Science, Bhimtal, India. doi:10.46620/ursi_rsrc24/1070cxl4177</li>
                     <li class="conference">Jagne, M., <b>Brawar, B.</b>, & Datta, A. (2023, December 14). Ensemble machine learning model for ionospheric TEC prediction over low-latitude regions. 2023 8th International Conference on Computers and Devices for Communication (CODEC), 1–2. Presented at the 2023 8th International Conference on Computers and Devices for Communication (CODEC), Kolkata, India. doi:10.1109/codec60112.2023.10465765</li>
                 </ol>
+
+                    <script>
+                        function filterList(filter) {
+                            var items = document.querySelectorAll("#publication-list li");
+                            
+                            items.forEach(function(item) {
+                                // Check if the filter matches the class or if 'all' is selected
+                                if (filter === "all" || item.classList.contains(filter)) {
+                                    item.style.display = ""; // Show the item
+                                } else {
+                                    item.style.display = "none"; // Hide the item
+                                }
+                            });
+                        }
+                        filterList("all")
+                    </script>
                 
-                <script>
-                    function filterList(filter) {
-                        var items = document.querySelectorAll("#publication-list li");
-                        
-                        items.forEach(function(item) {
-                            if (filter === "all" || item.classList.contains(filter)) {
-                                item.classList.remove("hidden");
-                            } else {
-                                item.classList.add("hidden");
-                            }
-                        });
-                    }
-                </script>
+
 
                 <div class="section-content">
 
