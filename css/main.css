@@ -1399,6 +1399,10 @@ textarea.form-control, textarea.form-control:focus {
   -o-transition: all .2s ease-in-out;
   -ms-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
+  overflow: hidden;
+}
+.certificate-item:hover {
+  height: auto; /* expand to fit full content */
 }
 
 .certi-logo {
